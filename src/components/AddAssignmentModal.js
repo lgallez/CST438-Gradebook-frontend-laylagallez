@@ -42,25 +42,22 @@ const AddAssignmentModal = () => {
   };
 
   const handleSubmit = () => {    
-    console.log("you added: " + courseID);
-
-    const token = Cookies.get('XSRF-TOKEN');
       fetch(`${SERVER_URL}/assignments/new?name=${assignmentName}&due=${dueDate}&id=${courseID}`, 
         {  
           method: 'POST', 
-          headers: { 'X-XSRF-TOKEN': token }
         } )
 
         .then(res => {
             if (res.ok) {
-              toast.success("Assignment successfully added", {
-              position: toast.POSITION.BOTTOM_LEFT
-              });
-              this.fetchGrades();
-            } else {
-              toast.error("Assigment failed to add", {
-              position: toast.POSITION.BOTTOM_LEFT
-              });
+            toast.success("Assignment successfully added", {
+            position: toast.POSITION.BOTTOM_LEFT
+            });
+            this.fetchGrades();
+            } 
+            else {
+            toast.error("Assigment failed to add", {
+            position: toast.POSITION.BOTTOM_LEFT
+            });
         }})
 
     handleClose();
